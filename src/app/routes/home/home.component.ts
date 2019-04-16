@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
     constructor(public auth: AuthService) { }
 
     ngOnInit() {
-        this.auth.authUser.subscribe(user => console.log(user.photoURL));
     }
 
 }

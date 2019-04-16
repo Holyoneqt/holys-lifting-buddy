@@ -1,1 +1,18 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+* {
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.success {
+    background-color: #00e676;
+    color: black;
+}
+
+.mat-button.mat-small {
+    min-width: 1%;
+}

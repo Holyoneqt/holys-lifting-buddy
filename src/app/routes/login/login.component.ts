@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
     constructor(public auth: AuthService) { }
 
     ngOnInit() {
-        this.auth.authUser.subscribe(user => console.log(user.photoURL));
+        
     }
 
 }

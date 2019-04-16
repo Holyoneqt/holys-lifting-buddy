@@ -1,0 +1,13 @@
+<mat-nav-list>
+    <h3 mat-subheader>Templates</h3>
+    <a mat-list-item *ngFor="let template of templates" routerLink="../edit" [queryParams]="{ template: template | json }">
+        <mat-icon mat-list-icon>fitness_center</mat-icon>
+        <h4 mat-line>{{ template.name }}</h4>
+        <p mat-line> {{ getNumTrainingDays(template) }} Days </p>
+        <mat-divider></mat-divider>
+    </a>
+</mat-nav-list>
+<a mat-stroked-button color="primary" style="margin-top: 15px;" class="full-width" routerLink="../edit" [queryParams]="undefined">
+    <mat-icon color="primary">add_circle</mat-icon>
+    New Template
+</a>
