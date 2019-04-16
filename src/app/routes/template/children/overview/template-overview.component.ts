@@ -13,7 +13,11 @@ export class TemplateOverviewComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        this.templates = [ JSON.parse(localStorage.getItem('template')) ];
+        if (localStorage.getItem('template')) {
+            this.templates = [ JSON.parse(localStorage.getItem('template')) ];
+        } else {
+            this.templates = [];
+        }
     }
 
     public getNumTrainingDays(template: Template): number {
