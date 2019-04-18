@@ -4,6 +4,7 @@ export interface Exercise {
     /** this is the short name (ID) */
     name: string;
     type: ExerciseType;
+    weekMax?: number;
 }
 
 export interface Set {

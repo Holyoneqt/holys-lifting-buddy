@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { DAYS } from 'src/app/global/static/constants';
 import { EXERCISE_GROUPS } from 'src/app/global/static/exercise-data';
 import { ExerciseType } from 'src/app/models/exercise.model';
@@ -25,29 +24,26 @@ export class EditTemplateComponent implements OnInit {
 
     public template: Template;
 
-    constructor(private data: DataService, private router: Router, private route: ActivatedRoute,  private matDialog: MatDialog) { }
+    constructor(private data: DataService, private router: Router, private route: ActivatedRoute, private matDialog: MatDialog) { }
 
     ngOnInit() {
-        this.route.queryParams.pipe(
-            first()
-        ).subscribe(params => {
-            if (params.template) {
-                this.editType = 'Edit';
-                this.template = JSON.parse(params.template);
-            } else {
-                this.editType = 'New';
-                this.template = {
-                    name: '',
-                    inUse: false,
-                    days: Array.from({ length: 7 }, (_, index) => {
-                        return {
-                            index: index,
-                            blocks: [],
-                        } as TrainingDay;
-                    })
-                };
-            }
-        });
+        const paramterTemplate = this.data.getRoutingParameter<Template>();
+        if (paramterTemplate) {
+            this.editType = 'Edit';
+            this.template = paramterTemplate;
+        } else {
+            this.editType = 'New';
+            this.template = {
+                name: '',
+                inUse: false,
+                days: Array.from({ length: 7 }, (_, index) => {
+                    return {
+                        index: index,
+                        blocks: [],
+                    } as TrainingDay;
+                })
+            };
+        }
 
     }
 
@@ -76,7 +72,7 @@ export class EditTemplateComponent implements OnInit {
 
         dialogConfig.disableClose = true;
         dialogConfig.height = '90vh';
-        dialogConfig.width = '100vw';
+        dialogConfig.width = '90vw';
         dialogConfig.data = { trainingBlock: block };
 
         const dialogRef = this.matDialog.open(SetsDialogComponent, dialogConfig);

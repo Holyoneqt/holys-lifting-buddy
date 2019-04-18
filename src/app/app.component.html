@@ -1,8 +1,24 @@
 <div class="app-toolbar-container">
-    <mat-toolbar color="primary" class="example-toolbar">
-        <button mat-icon-button (click)="sidenav.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
+    <mat-toolbar color="primary">
+        <mat-grid-list cols="12" style="width: 100%" rowHeight="40px">
+            <mat-grid-tile colspan="1">
+                <button mat-icon-button (click)="sidenav.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="10">
+                <div *ngIf="stopwatch.isTicking$ | async">
+                    <button mat-flat-button style="min-width: 200px;" (click)="openStopwatchDialog()">
+                        <mat-icon>timer</mat-icon>
+                        {{ stopwatch.stopwatch$ | async }} seconds
+                    </button>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1">
+            </mat-grid-tile>
+        </mat-grid-list>
+        <span>
+        </span>
     </mat-toolbar>
 
     <mat-sidenav-container class="app-sidenav-container" style.marginTop.px="56">

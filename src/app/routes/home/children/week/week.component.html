@@ -1,20 +1,46 @@
-<!-- <mat-accordion *ngIf="template">
-    <mat-expansion-panel *ngFor="let block of trainingDay.blocks">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                {{ block.exercise.name | exercise }}
-            </mat-panel-title>
-            <mat-panel-description>
-                Max.: {{ liftingMaxes[block.exercise.name] }}kg
-            </mat-panel-description>
-        </mat-expansion-panel-header>
+<mat-grid-list cols="7" rowHeight="50px">
+    <mat-grid-tile colspan="3">
+        {{ week.weekStart | date }}
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <h4>-</h4>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3">
+            {{ week.weekEnd | date }}
+    </mat-grid-tile>
+</mat-grid-list>
 
-        <mat-selection-list #sets>
-            <mat-list-option *ngFor="let set of block.sets">
-                {{ set.reps }}{{ set.amrap ? '+' : 'x' }} {{ calculatePercentage(block.exercise, set.weightPercentage) }}kg
-                <mat-divider></mat-divider>
-            </mat-list-option>
-        </mat-selection-list>
+<mat-tab-group>
+    <mat-tab *ngFor="let day of week.template.days; let i = index;" [label]="">
+        <ng-template mat-tab-label>
+            <mat-icon *ngIf="dayIsComplete(day)" color="primary" style="margin-right: 8px;">done</mat-icon>
+            {{ DAY_NAMES[day.index] }}
+        </ng-template>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let block of day.blocks; let blockIndex = index;">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{ block.exercise.name | exercise }}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Max: {{ block.exercise.weekMax }}kg
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
 
-    </mat-expansion-panel>
-</mat-accordion> -->
+                <mat-list #sets>
+                    <mat-list-item *ngFor="let set of block.sets let setIndex = index;"
+                        (click)="setDone(i, blockIndex, setIndex)">
+                        <span style="min-width: 150px;">
+                            {{ set.reps }}{{ set.amrap ? '+' : 'x' }}
+                            {{ calculatePercentage(block.exercise, set) }}kg
+                        </span>
+                        <mat-icon style="margin-left: 40%" *ngIf="isDone(i, blockIndex, setIndex)">
+                            done
+                        </mat-icon>
+                        <mat-divider></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-tab>
+</mat-tab-group>

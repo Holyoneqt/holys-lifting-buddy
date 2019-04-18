@@ -1,0 +1,22 @@
+<mat-grid-list cols="2" rowHeight="40px">
+    <mat-grid-tile colspan="2" rowspan="5">
+        <mat-progress-spinner color="primary" mode="determinate" [value]="percentage" diameter="200">
+        </mat-progress-spinner>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">{{ time }} seconds</mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="2">
+        <button mat-flat-button color="primary" (click)="addSeconds(-15)">
+            -15 sec
+        </button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="2">
+        <button mat-flat-button color="primary" (click)="addSeconds(15)">
+            +15 sec
+        </button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">
+        <button mat-flat-button class="full-width" (click)="stopwatch.cancelStopwatch()">
+            Skip Timer
+        </button>
+    </mat-grid-tile>
+</mat-grid-list>

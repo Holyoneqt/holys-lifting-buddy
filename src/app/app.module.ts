@@ -2,8 +2,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
+import { StopwatchDialogComponent } from './global/components/stopwatch-dialog/stopwatch-dialog.component';
 import { ExercisePipe } from './global/pipes/exercise.pipe';
 import { AppFirebaseModule } from './modules/app-firebase.module';
 import { AppInitializeModule } from './modules/app-initialize.module';
@@ -22,8 +25,7 @@ import { TemplateComponent } from './routes/template/template.component';
 import { AuthService } from './services/auth.service';
 import { DataService } from './services/data.service';
 import { DbService } from './services/db.service';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { StopwatchService } from './services/stopwatch.service';
 
 @NgModule({
     declarations: [
@@ -41,6 +43,8 @@ import { environment } from '../environments/environment';
         SetsDialogComponent,
 
         LiftsComponent,
+
+        StopwatchDialogComponent,
 
         // Pipes
         ExercisePipe,
@@ -66,9 +70,11 @@ import { environment } from '../environments/environment';
         AuthService,
         DbService,
         DataService,
+        StopwatchService,
     ],
     entryComponents: [
-        SetsDialogComponent
+        SetsDialogComponent,
+        StopwatchDialogComponent,
     ],
     bootstrap: [AppComponent]
 })

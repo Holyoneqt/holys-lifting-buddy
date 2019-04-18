@@ -10,6 +10,7 @@ export class DataService {
     private readonly dataKey = 'hlb-data';
 
     private data: AppData;
+    private routingParameter: any;
 
     constructor() {
         if (localStorage.getItem(this.dataKey)) {
@@ -22,6 +23,14 @@ export class DataService {
 
     public getData(): AppData {
         return this.data;
+    }
+
+    public setRoutingParameter(obj: any): void {
+        this.routingParameter = obj;
+    }
+
+    public getRoutingParameter<T>(): T {
+        return this.routingParameter;
     }
 
     private writeData(): void {
@@ -37,6 +46,12 @@ export class DataService {
             week,
             ...this.data.weeks
         ];
+        this.writeData();
+    }
+
+    public updateWeek(week: TrainingWeek): void {
+        const index = this.data.weeks.findIndex(w => w.weekStart === week.weekStart);
+        this.data.weeks[index] = week;
         this.writeData();
     }
 
