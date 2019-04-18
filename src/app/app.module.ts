@@ -22,6 +22,8 @@ import { TemplateComponent } from './routes/template/template.component';
 import { AuthService } from './services/auth.service';
 import { DataService } from './services/data.service';
 import { DbService } from './services/db.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -55,6 +57,7 @@ import { DbService } from './services/db.service';
         AppRoutingModule,
         AppMaterialModule,
         AppFirebaseModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ],
     providers: [
         { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
