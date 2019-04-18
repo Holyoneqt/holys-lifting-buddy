@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Template } from 'src/app/models/template.model';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
     selector: 'app-template-overview',
@@ -10,14 +11,10 @@ export class TemplateOverviewComponent implements OnInit {
     
     public templates: Template[];
 
-    constructor() { }
+    constructor(private data: DataService) { }
 
     ngOnInit() {
-        if (localStorage.getItem('template')) {
-            this.templates = [ JSON.parse(localStorage.getItem('template')) ];
-        } else {
-            this.templates = [];
-        }
+        this.templates = this.data.getData().templates;
     }
 
     public getNumTrainingDays(template: Template): number {

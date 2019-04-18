@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import {
     MatButtonModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatNativeDateModule,
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
@@ -36,6 +39,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatTabsModule,
         MatCheckboxModule,
         MatRadioModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatExpansionModule
     ],
 })
 export class AppMaterialModule { }

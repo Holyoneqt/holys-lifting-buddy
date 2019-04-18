@@ -1,0 +1,24 @@
+<form #liftsForm="ngForm" (focusout)="onFormFocusOut(liftsForm)">
+    <mat-grid-list cols="4" rowHeight="40px">
+        <mat-grid-tile colspan="3"></mat-grid-tile>
+        <mat-grid-tile colspan="1">
+            1RM
+        </mat-grid-tile>
+        <div *ngFor="let group of exercisesGroups">
+            <mat-grid-tile colspan="4" style="border-top: 1px dotted #00000056;">
+                {{ group.name }}
+            </mat-grid-tile>
+            <div *ngFor="let exercise of group.exercises;">
+                <mat-grid-tile colspan="3">
+                    <p class="mat-body-1">{{ exercise.display }}</p>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1">
+                    <mat-form-field class="full-width">
+                        <input matInput type="number" [(ngModel)]="rawLiftingValues[exercise.value]" name="{{exercise.value}}">
+                        <span matSuffix>kg</span>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </div>
+        </div>
+    </mat-grid-list>
+</form>

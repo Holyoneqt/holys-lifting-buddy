@@ -1,7 +1,7 @@
 <mat-nav-list>
     <h3 mat-subheader>Templates</h3>
     <a mat-list-item *ngFor="let template of templates" routerLink="../edit" [queryParams]="{ template: template | json }">
-        <mat-icon mat-list-icon>fitness_center</mat-icon>
+        <mat-icon matListIcon *ngIf="template.inUse" color="primary">check_box</mat-icon>
         <h4 mat-line>{{ template.name }}</h4>
         <p mat-line> {{ getNumTrainingDays(template) }} Days </p>
         <mat-divider></mat-divider>

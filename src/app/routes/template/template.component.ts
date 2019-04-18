@@ -10,7 +10,6 @@ export class TemplateComponent implements OnInit {
     
     constructor() { }
 
-    ngOnInit() {
-    }
+    ngOnInit() { }
 
 }

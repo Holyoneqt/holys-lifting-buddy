@@ -6,6 +6,7 @@ import { DAYS } from 'src/app/global/static/constants';
 import { EXERCISE_GROUPS } from 'src/app/global/static/exercise-data';
 import { ExerciseType } from 'src/app/models/exercise.model';
 import { Template, TrainingDay, TrainingDayBlock } from 'src/app/models/template.model';
+import { DataService } from 'src/app/services/data.service';
 
 import { SetsDialogComponent } from '../../components/sets-dialog/sets-dialog.component';
 
@@ -24,7 +25,7 @@ export class EditTemplateComponent implements OnInit {
 
     public template: Template;
 
-    constructor(private router: Router, private route: ActivatedRoute,  private matDialog: MatDialog) { }
+    constructor(private data: DataService, private router: Router, private route: ActivatedRoute,  private matDialog: MatDialog) { }
 
     ngOnInit() {
         this.route.queryParams.pipe(
@@ -50,13 +51,16 @@ export class EditTemplateComponent implements OnInit {
 
     }
 
+    public cancel(): void {
+        this.router.navigate(['template/overview']);
+    }
+
     public saveTemplate(): void {
-        localStorage.setItem('template', JSON.stringify(this.template));
+        this.data.addOrUpdateTemplate(this.template);
         this.router.navigate(['template/overview']);
     }
 
     public addExercise(dayIndex: number, type: ExerciseType): void {
-        console.log(this.template);
         this.template.days[dayIndex].blocks.push({
             exercise: { name: '', type: type },
             sets: []

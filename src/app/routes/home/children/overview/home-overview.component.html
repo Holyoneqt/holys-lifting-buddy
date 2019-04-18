@@ -1,0 +1,26 @@
+<mat-grid-list cols="6" rowHeight="50px">
+    <mat-grid-tile colspan="5">
+        <h2>Your Trainingweeks</h2>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <button mat-icon-button color="primary" (click)="newTrainingsWeek()">
+            <mat-icon>add_box</mat-icon>
+        </button>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<mat-nav-list>
+    <mat-list-item *ngIf="weeks.length <= 0">
+        <mat-toolbar>
+            <p class="mat-body full-width" style="text-align: center;">
+                Add a Week by clicking the +
+            </p>
+        </mat-toolbar>
+    </mat-list-item>
+    <div *ngIf="weeks.length > 0">
+        <mat-list-item *ngFor="let week of weeks">
+            <h3 mat-line>{{ week.weekStart | date }} - {{ week.weekEnd | date }} </h3>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+    </div>
+</mat-nav-list>
