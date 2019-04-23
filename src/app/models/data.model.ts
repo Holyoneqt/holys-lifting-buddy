@@ -1,3 +1,4 @@
+import { defaultTemplates } from '../global/static/constants';
 import { Template } from './template.model';
 import { TrainingWeek } from './week.model';
 
@@ -12,6 +13,8 @@ export interface AppData {
 
 export const initialAppData: AppData = {
     lifts: {},
-    templates: [],
+    templates: [
+        ...defaultTemplates
+    ],
     weeks: [],
 };

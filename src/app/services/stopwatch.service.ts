@@ -13,9 +13,8 @@ export class StopwatchService {
     private stopwatchSub: Subscription;
 
     constructor() { 
-        this.isTicking$ = new BehaviorSubject(true);
+        this.isTicking$ = new BehaviorSubject(false);
         this.stopwatch$ = new BehaviorSubject(0);
-        this.startStopwatch();
     }
 
     public startStopwatch(): void {
@@ -39,6 +38,12 @@ export class StopwatchService {
         this.stopwatchSub.unsubscribe();
         this.isTicking = false;
         this.isTicking$.next(false);
+    }
+
+    public addTime(seconds: number): void {
+        if (this.timeToWait + seconds > 5) {
+            this.timeToWait += seconds;
+        }
     }
 
 }

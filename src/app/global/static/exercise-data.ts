@@ -40,6 +40,7 @@ export const EXERCISE_GROUPS: ExerciseGroup[] = [
             { value: '10', display: 'Shoulder Press' },
             { value: '11', display: 'Pin Press' },
             { value: '12', display: 'Close Grip Bench Press' },
+            { value: '13', display: 'Incline Bench Press' },
         ]
     },
 ];

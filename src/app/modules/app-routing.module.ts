@@ -14,7 +14,7 @@ import { TemplateComponent } from '../routes/template/template.component';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'home',
         pathMatch: 'full'
     },
     { path: 'login', component: LoginComponent },

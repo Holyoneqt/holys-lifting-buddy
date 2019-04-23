@@ -41,7 +41,7 @@ export class StopwatchDialogComponent implements OnInit, OnDestroy {
     }
 
     public addSeconds(amount: number): void {
-        this.stopwatch.timeToWait += amount;
+        this.stopwatch.addTime(amount);
     }
 
 }

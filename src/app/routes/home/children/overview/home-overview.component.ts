@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Template } from 'src/app/models/template.model';
+import { Set } from 'src/app/models/exercise.model';
+import { Template, TrainingDay, TrainingDayBlock } from 'src/app/models/template.model';
 import { TrainingWeek } from 'src/app/models/week.model';
 import { DataService } from 'src/app/services/data.service';
 
@@ -23,23 +24,38 @@ export class HomeOverviewComponent implements OnInit {
     }
 
     public newTrainingsWeek(): void {
-        const currentTemplate = this.data.getData().templates.find(template => template.inUse === true);
+        const template = this.data.getData().templates.find(tmp => tmp.inUse === true);
+        this.increaseMaxes(this.data.getData().weeks[0]);
+        const currentTemplate: Template = { 
+            ...template,
+            days: template.days.map(day => {
+                return {
+                    ...day,
+                    blocks: day.blocks.map(block => {
+                        return {
+                            exercise: {
+                                ...block.exercise,
+                                weekMax: this.maxLifts[block.exercise.name] || 0
+                            },
+                            sets: block.sets.map(set => {
+                                return {
+                                    ...set,
+                                    done: false,
+                                    amrapReps: undefined,
+                                } as Set;
+                            })
+                        } as TrainingDayBlock;
+                    }),
+                } as TrainingDay;
+            }),
+        };
+        
+
         const prettyTemplate: Template = {
             inUse: true,
             name: currentTemplate.name,
             days: currentTemplate.days.filter(day => day.blocks.length > 0),
         };
-        prettyTemplate.days.forEach(day => {
-            day.blocks = day.blocks.map(block => {
-                return {
-                    ...block,
-                    exercise: {
-                        weekMax: this.maxLifts[block.exercise.name] || 0,
-                        ...block.exercise,
-                    }
-                };
-            });
-        });
 
         const nextWeekDate = new Date(new Date().setDate(new Date().getDate() + 7));
         this.data.addWeek({
@@ -48,6 +64,36 @@ export class HomeOverviewComponent implements OnInit {
             template: prettyTemplate,
         });
         this.weeks = this.data.getData().weeks;
+    }
+
+    private increaseMaxes(lastWeek: TrainingWeek): void {
+        if (!lastWeek) { return; }
+        lastWeek.template.days.forEach(day => {
+            day.blocks.forEach(block => {
+                const progressionSet = block.sets.find(set => set.progression);
+                if (progressionSet && progressionSet.amrap) {
+                    let increaseBy = 0;
+                    switch (progressionSet.amrapReps) {
+                        case undefined:
+                        case '0': 
+                        case '1': 
+                            increaseBy = 0;
+                            break;
+                        case '2':
+                        case '3':
+                        case '4':
+                            increaseBy = 2.5;
+                            break;
+                        default: 
+                            increaseBy = 5;
+                            break;
+                    }
+
+                    this.maxLifts[block.exercise.name] += increaseBy;
+                }
+            });
+        });
+        this.data.setLifts(this.maxLifts);
     }
 
     public viewWeek(week: TrainingWeek): void {

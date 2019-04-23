@@ -11,5 +11,7 @@ export interface Set {
     reps: number;
     weightPercentage: number;
     amrap?: boolean;
+    amrapReps?: string;
+    progression?: boolean;
     done?: boolean;
 }

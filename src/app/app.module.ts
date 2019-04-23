@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
-import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
+import { AmrapRepsDialogComponent } from './global/components/amrap-reps-dialog/amrap-reps-dialog.component';
 import { StopwatchDialogComponent } from './global/components/stopwatch-dialog/stopwatch-dialog.component';
 import { ExercisePipe } from './global/pipes/exercise.pipe';
 import { AppFirebaseModule } from './modules/app-firebase.module';
@@ -36,6 +35,7 @@ import { StopwatchService } from './services/stopwatch.service';
         HomeComponent,
         HomeOverviewComponent,
         WeekComponent,
+        AmrapRepsDialogComponent,
 
         TemplateComponent,
         TemplateOverviewComponent,
@@ -61,7 +61,7 @@ import { StopwatchService } from './services/stopwatch.service';
         AppRoutingModule,
         AppMaterialModule,
         AppFirebaseModule,
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+        // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ],
     providers: [
         { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
@@ -73,6 +73,7 @@ import { StopwatchService } from './services/stopwatch.service';
         StopwatchService,
     ],
     entryComponents: [
+        AmrapRepsDialogComponent,
         SetsDialogComponent,
         StopwatchDialogComponent,
     ],

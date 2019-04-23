@@ -1,14 +1,12 @@
-<mat-grid-list cols="8" rowHeight="40px">
-    <mat-grid-tile colspan="2">
-        Reps
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-    </mat-grid-tile>
-    <mat-grid-tile colspan="2">
-        Weight
-    </mat-grid-tile>
-    <mat-grid-tile colspan="2">
+<mat-grid-list cols="10" rowHeight="40px">
+    <mat-grid-tile colspan="2"></mat-grid-tile> <!-- Reps -->
+    <mat-grid-tile colspan="1"></mat-grid-tile> <!-- x -->
+    <mat-grid-tile colspan="2"></mat-grid-tile> <!-- Weight -->
+    <mat-grid-tile colspan="2">                 <!-- Amrap? -->
         <h6 mat-subheader>AMRAP?</h6>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">                 <!-- Progression? -->
+        <h6 mat-subheader>Prog.?</h6>
     </mat-grid-tile>
     <mat-grid-tile colspan="1">
     </mat-grid-tile>
@@ -25,12 +23,16 @@
             </mat-grid-tile>
             <mat-grid-tile colspan="2">
                 <mat-form-field class="full-width">
-                    <input matInput type="number" required="true" [(ngModel)]="set.weightPercentage" name="weightPercentage-{{i}}">
+                    <input matInput type="number" required="true" [(ngModel)]="set.weightPercentage"
+                        name="weightPercentage-{{i}}">
                     <span matSuffix>%</span>
                 </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile colspan="2">
                 <mat-checkbox color="primary" tabindex="-1" [(ngModel)]="set.amrap" name="amrap-{{i}}"></mat-checkbox>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2">
+                <mat-checkbox color="primary" tabindex="-1" [(ngModel)]="set.progression" name="progression-{{i}}"></mat-checkbox>
             </mat-grid-tile>
             <mat-grid-tile colspan="1">
                 <button mat-icon-button type="button" color="warn" tabindex="-1" (click)="deleteSet(i)">
@@ -38,14 +40,14 @@
                 </button>
             </mat-grid-tile>
         </div>
-        <mat-grid-tile colspan="8">
-            <button mat-stroked-button color="primary" class="full-width" type="button" (click)="addSet()">
+        <mat-grid-tile colspan="5">
+            <button mat-stroked-button color="primary" type="button" (click)="addSet()">
                 <mat-icon color="primary">add_circle</mat-icon>
                 Add Set
             </button>
         </mat-grid-tile>
-        <mat-grid-tile colspan="8">
-            <button mat-stroked-button class="success full-width" type="submit" (click)="save(setsForm.valid)">
+        <mat-grid-tile colspan="5">
+            <button mat-stroked-button color="primary" type="submit" (click)="save(setsForm.valid)">
                 Save
             </button>
         </mat-grid-tile>

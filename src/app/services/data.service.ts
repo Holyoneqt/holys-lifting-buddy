@@ -18,6 +18,7 @@ export class DataService {
         } else {
             this.data = { ...initialAppData };
             this.writeData();
+            this.readData();
         }
     }
 
@@ -30,7 +31,7 @@ export class DataService {
     }
 
     public getRoutingParameter<T>(): T {
-        return this.routingParameter;
+        return { ...this.routingParameter };
     }
 
     private writeData(): void {

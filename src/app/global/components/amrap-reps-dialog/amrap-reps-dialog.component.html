@@ -1,0 +1,10 @@
+<mat-grid-list cols="1" rowHeight="35px">
+    <mat-grid-tile rowspan="2">
+        <mat-form-field>
+            <input #amrapReps matInput type="number" placeholder="Reps">
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <button mat-flat-button color="primary" (click)="save(amrapReps.value)">Done</button>
+    </mat-grid-tile>
+</mat-grid-list>
