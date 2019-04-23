@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { StopwatchDialogComponent } from './global/components/stopwatch-dialog/stopwatch-dialog.component';
+import { DataService } from './services/data.service';
 import { StopwatchService } from './services/stopwatch.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { StopwatchService } from './services/stopwatch.service';
 })
 export class AppComponent {
 
-    constructor(public stopwatch: StopwatchService, private matDialog: MatDialog) { }
+    constructor(public data: DataService, public stopwatch: StopwatchService, private matDialog: MatDialog) { }
 
     public openStopwatchDialog(): void {
         const dialogConfig = new MatDialogConfig();

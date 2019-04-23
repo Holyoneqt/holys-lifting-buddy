@@ -467,5 +467,521 @@ export const defaultTemplates: Template[] = [
                 ]
             }
         ]
+    },
+    // Holy's nSuns Variation (5 Days)
+    {
+        name: 'Holy\'s nSuns Variation',
+        inUse: false,
+        days: [
+            {
+                index: 0,
+                blocks: [
+                    {
+                        exercise: {
+                            name: '4',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 5,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 1,
+                                weightPercentage: 95,
+                                amrap: true,
+                                progression: true,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 90,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 80,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 65,
+                                amrap: true,
+                            },
+                        ]
+                    },
+                    {
+                        exercise: {
+                            name: '1',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 8,
+                                weightPercentage: 65,
+                            },
+                            {
+                                reps: 6,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 85,
+                            },
+                        ]
+                    },
+                    {
+                        exercise: {
+                            name: '10',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 8,
+                                weightPercentage: 55,
+                            },
+                            {
+                                reps: 6,
+                                weightPercentage: 65,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 75,
+                            },
+                        ]
+                    }
+                ]
+            },
+            {
+                index: 1,
+                blocks: [
+                    {
+                        exercise: {
+                            name: '3',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 5,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 1,
+                                weightPercentage: 95,
+                                amrap: true,
+                                progression: true,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 90,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 80,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 65,
+                                amrap: true,
+                            },
+                        ]
+                    },
+                    {
+                        exercise: {
+                            name: '2',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 8,
+                                weightPercentage: 50,
+                            },
+                            {
+                                reps: 6,
+                                weightPercentage: 60,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 7,
+                                weightPercentage: 70,
+                                progression: true,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 6,
+                                weightPercentage: 65,
+                            },
+                            {
+                                reps: 8,
+                                weightPercentage: 65,
+                            },
+                        ]
+                    }
+                ]
+            },
+            {
+                index: 2,
+                blocks: [
+                    {
+                        exercise: {
+                            name: '10',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 5,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 1,
+                                weightPercentage: 95,
+                                amrap: true,
+                                progression: true,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 90,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 80,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 65,
+                                amrap: true,
+                            },
+                        ]
+                    },
+                    {
+                        exercise: {
+                            name: '4',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 8,
+                                weightPercentage: 65,
+                            },
+                            {
+                                reps: 6,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 85,
+                            },
+                        ]
+                    },
+                    {
+                        exercise: {
+                            name: '1',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 8,
+                                weightPercentage: 55,
+                            },
+                            {
+                                reps: 6,
+                                weightPercentage: 65,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 75,
+                            },
+                        ]
+                    }
+                ]
+            },
+            {
+                index: 3,
+                blocks: [
+                    {
+                        exercise: {
+                            name: '9',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 5,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 1,
+                                weightPercentage: 95,
+                                amrap: true,
+                                progression: true,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 90,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 80,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 65,
+                                amrap: true,
+                            },
+                        ]
+                    },
+                    {
+                        exercise: {
+                            name: '3',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 8,
+                                weightPercentage: 50,
+                            },
+                            {
+                                reps: 6,
+                                weightPercentage: 60,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 7,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 6,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 8,
+                                weightPercentage: 70,
+                            },
+                        ]
+                    }
+                ]
+            },
+            {
+                index: 4,
+                blocks: [
+                    {
+                        exercise: {
+                            name: '1',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 5,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 1,
+                                weightPercentage: 95,
+                                amrap: true,
+                                progression: true,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 90,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 3,
+                                weightPercentage: 80,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 70,
+                            },
+                            {
+                                reps: 5,
+                                weightPercentage: 65,
+                                amrap: true,
+                            },
+                        ]
+                    },
+                    {
+                        exercise: {
+                            name: '10',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 8,
+                                weightPercentage: 65,
+                            },
+                            {
+                                reps: 6,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 85,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 85,
+                            },
+                        ]
+                    },
+                    {
+                        exercise: {
+                            name: '4',
+                            type: 'main'
+                        },
+                        sets: [
+                            {
+                                reps: 8,
+                                weightPercentage: 55,
+                            },
+                            {
+                                reps: 6,
+                                weightPercentage: 65,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 75,
+                            },
+                            {
+                                reps: 4,
+                                weightPercentage: 75,
+                            },
+                        ]
+                    }
+                ]
+            },
+        ]
     }
 ];

@@ -17,7 +17,7 @@ export class StopwatchDialogComponent implements OnInit, OnDestroy {
     private stopwatchSub: Subscription;
     private isTickingSub: Subscription;
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any, private stopwatch: StopwatchService, private changeDetector: ChangeDetectorRef,
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any, public stopwatch: StopwatchService, private changeDetector: ChangeDetectorRef,
         private matDialogRef: MatDialogRef<StopwatchDialogComponent>) {
     }
 

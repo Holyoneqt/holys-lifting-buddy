@@ -1,4 +1,4 @@
-<mat-grid-list cols="7" rowHeight="50px">
+<mat-grid-list cols="8" rowHeight="50px">
     <mat-grid-tile colspan="3">
         {{ week.weekStart | date }}
     </mat-grid-tile>
@@ -7,6 +7,11 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="3">
         {{ week.weekEnd | date }}
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <button mat-icon-button type="button" color="warn" tabindex="-1" (click)="deleteWeek()">
+            <mat-icon>delete</mat-icon>
+        </button>
     </mat-grid-tile>
 </mat-grid-list>
 
@@ -29,14 +34,17 @@
 
                 <mat-list #sets>
                     <mat-list-item *ngFor="let set of block.sets let setIndex = index;"
-                        (click)="setDone(i, blockIndex, setIndex)">
-                        <span style="min-width: 150px;">
+                        (click)="setDone(i, blockIndex, setIndex)" style="height: 45px;">
+                        <p style="min-width: 50px;">
                             {{ set.reps }}{{ set.amrap ? '+' : 'x' }}
-                            {{ calculatePercentage(block.exercise, set) }}kg
+                        </p>
+                        <p style="min-width: 100px;">
+                            {{ calculatePercentage(block.exercise, set) }}
+                            <span class="mat-small">kg</span>
                             <span *ngIf="set.amrap && set.amrapReps" style="margin-left: 20px;">
                                 ({{ set.amrapReps }})
                             </span>
-                        </span>
+                        </p>
                         <mat-icon style="margin-left: 40%" *ngIf="isDone(i, blockIndex, setIndex)">
                             done
                         </mat-icon>

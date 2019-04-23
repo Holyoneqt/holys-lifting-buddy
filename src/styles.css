@@ -16,3 +16,7 @@
 .mat-button.mat-small {
     min-width: 1%;
 }
+
+.mat-icon-button.mat-warn {
+    opacity: 0.65;
+}

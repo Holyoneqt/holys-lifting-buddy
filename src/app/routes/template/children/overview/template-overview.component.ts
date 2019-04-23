@@ -18,7 +18,7 @@ export class TemplateOverviewComponent implements OnInit {
         this.templates = this.data.getData().templates;
     }
 
-    public editTemplate(template: Template): void {
+    public editTemplate(template?: Template): void {
         this.data.setRoutingParameter(template);
         this.router.navigate(['template/edit']);
     }

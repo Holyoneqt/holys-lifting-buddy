@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DAYS } from 'src/app/global/static/constants';
 import { EXERCISE_GROUPS } from 'src/app/global/static/exercise-data';
+import { Global } from 'src/app/global/util/util';
 import { ExerciseType } from 'src/app/models/exercise.model';
 import { Template, TrainingDay, TrainingDayBlock } from 'src/app/models/template.model';
 import { DataService } from 'src/app/services/data.service';
@@ -28,7 +29,7 @@ export class EditTemplateComponent implements OnInit {
 
     ngOnInit() {
         const paramterTemplate = this.data.getRoutingParameter<Template>();
-        if (paramterTemplate) {
+        if (paramterTemplate && paramterTemplate.days) {
             this.editType = 'Edit';
             this.template = paramterTemplate;
         } else {
@@ -65,6 +66,14 @@ export class EditTemplateComponent implements OnInit {
 
     public filterExerciseType(trainingDay: TrainingDay, type: ExerciseType): TrainingDayBlock[] {
         return trainingDay.blocks.filter(block => block.exercise.type === type);
+    }
+
+    public disableInUse(): boolean {
+        if (this.template.inUse) {
+            return false;
+        } else {
+            return Global.Util.templateInUseSelected(this.data.getData());
+        }
     }
 
     public openSetsDialog(block: TrainingDayBlock): void {

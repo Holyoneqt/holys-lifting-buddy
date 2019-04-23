@@ -33,7 +33,6 @@ export class WeekComponent implements OnInit {
             this.router.navigate(['home']);
         } else {
             this.week = paramterWeek;
-            console.log(this.week);
         }
     }
 
@@ -87,6 +86,11 @@ export class WeekComponent implements OnInit {
             });
         });
         return complete;
+    }
+
+    public deleteWeek(): void {
+        this.data.deleteWeek(this.week);
+        this.router.navigate(['home']);
     }
 
     public openStopwatchDialog(): void {

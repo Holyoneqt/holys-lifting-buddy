@@ -50,6 +50,12 @@ export class DataService {
         this.writeData();
     }
 
+    public deleteWeek(week: TrainingWeek): void {
+        const index = this.data.weeks.findIndex(w => w.id === week.id);
+        this.data.weeks.splice(index, 1);
+        this.writeData();
+    }
+
     public updateWeek(week: TrainingWeek): void {
         const index = this.data.weeks.findIndex(w => w.weekStart === week.weekStart);
         this.data.weeks[index] = week;
@@ -69,6 +75,12 @@ export class DataService {
     public setLifts(lifts): void {
         this.data.lifts = lifts;
         this.writeData();
+    }
+
+    public deleteLocalData(): void {
+        this.data = { ...initialAppData };
+        this.writeData();
+        this.readData();
     }
 
 }

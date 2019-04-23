@@ -19,7 +19,7 @@
             </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile colspan="1">
-            <mat-checkbox color="primary" [(ngModel)]="template.inUse" name="templateInUse">
+            <mat-checkbox color="primary" [(ngModel)]="template.inUse" name="templateInUse" [disabled]="disableInUse()">
                 Use
             </mat-checkbox>
         </mat-grid-tile>

@@ -1,8 +1,13 @@
 <form #liftsForm="ngForm" (focusout)="onFormFocusOut()">
-    <mat-grid-list cols="4" rowHeight="40px">
+    <mat-toolbar *ngIf="!isTemplateInUse()">
+        <p class="mat-body full-width" style="text-align: center;">
+            You don't have a template selected to use.
+        </p>
+    </mat-toolbar>
+    <mat-grid-list cols="4" rowHeight="40px" *ngIf="isTemplateInUse()">
         <mat-grid-tile colspan="3"></mat-grid-tile>
         <mat-grid-tile colspan="1">
-            1RM
+            TM
         </mat-grid-tile>
         <div *ngFor="let group of exercisesGroups">
             <mat-grid-tile colspan="4" style="border-top: 1px dotted #00000056;">
@@ -14,7 +19,8 @@
                 </mat-grid-tile>
                 <mat-grid-tile colspan="1">
                     <mat-form-field class="full-width">
-                        <input matInput type="number" [(ngModel)]="rawLiftingValues[exercise.value]" name="{{exercise.value}}">
+                        <input matInput type="number" [(ngModel)]="rawLiftingValues[exercise.value]"
+                            name="{{exercise.value}}" [disabled]="liftNotUsedInTemplate(exercise)">
                         <span matSuffix>kg</span>
                     </mat-form-field>
                 </mat-grid-tile>

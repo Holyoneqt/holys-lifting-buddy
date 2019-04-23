@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Global } from 'src/app/global/util/util';
 import { Set } from 'src/app/models/exercise.model';
 import { Template, TrainingDay, TrainingDayBlock } from 'src/app/models/template.model';
 import { TrainingWeek } from 'src/app/models/week.model';
 import { DataService } from 'src/app/services/data.service';
+import { v4 as uuid } from 'uuid';
 
 @Component({
     selector: 'app-home-overview',
@@ -59,6 +61,7 @@ export class HomeOverviewComponent implements OnInit {
 
         const nextWeekDate = new Date(new Date().setDate(new Date().getDate() + 7));
         this.data.addWeek({
+            id: uuid(),
             weekStart: this.getStartOfWeek(nextWeekDate).getTime(),
             weekEnd: this.getEndOfWeek(nextWeekDate).getTime(),
             template: prettyTemplate,
@@ -90,10 +93,18 @@ export class HomeOverviewComponent implements OnInit {
                     }
 
                     this.maxLifts[block.exercise.name] += increaseBy;
+                } else if (progressionSet && !progressionSet.amrap) {
+                    if (progressionSet.done) {
+                        this.maxLifts[block.exercise.name] += 2.5;
+                    }
                 }
             });
         });
         this.data.setLifts(this.maxLifts);
+    }
+
+    public templateInUseSelected(): boolean {
+        return Global.Util.templateInUseSelected(this.data.getData());
     }
 
     public viewWeek(week: TrainingWeek): void {
