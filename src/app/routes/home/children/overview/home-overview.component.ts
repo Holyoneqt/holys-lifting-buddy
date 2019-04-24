@@ -28,12 +28,14 @@ export class HomeOverviewComponent implements OnInit {
     public newTrainingsWeek(): void {
         const template = this.data.getData().templates.find(tmp => tmp.inUse === true);
         this.increaseMaxes(this.data.getData().weeks[0]);
+        const maxLiftsForThisWeek = {};
         const currentTemplate: Template = { 
             ...template,
             days: template.days.map(day => {
                 return {
                     ...day,
                     blocks: day.blocks.map(block => {
+                        maxLiftsForThisWeek[block.exercise.name] = this.maxLifts[block.exercise.name] || 0;
                         return {
                             exercise: {
                                 ...block.exercise,
@@ -52,7 +54,7 @@ export class HomeOverviewComponent implements OnInit {
             }),
         };
         
-
+        console.log('max', maxLiftsForThisWeek);
         const prettyTemplate: Template = {
             inUse: true,
             name: currentTemplate.name,
@@ -67,6 +69,12 @@ export class HomeOverviewComponent implements OnInit {
             template: prettyTemplate,
         });
         this.weeks = this.data.getData().weeks;
+
+        
+        this.data.addProgress({
+            weekStart: this.getStartOfWeek(nextWeekDate).getTime(),
+            lifts: maxLiftsForThisWeek
+        });
     }
 
     private increaseMaxes(lastWeek: TrainingWeek): void {

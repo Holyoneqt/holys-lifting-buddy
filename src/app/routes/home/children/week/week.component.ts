@@ -95,7 +95,7 @@ export class WeekComponent implements OnInit {
 
     public openStopwatchDialog(): void {
         const dialogConfig = new MatDialogConfig();
-        dialogConfig.height = '60vh';
+        dialogConfig.height = '70vh';
         dialogConfig.width = '90vw';
         this.matDialog.open(StopwatchDialogComponent, dialogConfig);
     }

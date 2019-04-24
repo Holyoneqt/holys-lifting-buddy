@@ -1,4 +1,5 @@
 import { defaultTemplates } from '../global/static/constants';
+import { Progress } from './progress.model';
 import { Template } from './template.model';
 import { TrainingWeek } from './week.model';
 
@@ -9,6 +10,8 @@ export interface AppData {
     weeks: TrainingWeek[];
     /** All the Max-Lifts of the User */
     lifts: { [key: string]: number };
+    /** Progress of the User */
+    progress: Progress[];
 }
 
 export const initialAppData: AppData = {
@@ -17,4 +20,5 @@ export const initialAppData: AppData = {
         ...defaultTemplates
     ],
     weeks: [],
+    progress: [],
 };

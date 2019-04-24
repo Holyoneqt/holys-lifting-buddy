@@ -17,7 +17,7 @@ export class AppComponent {
     public openStopwatchDialog(): void {
         const dialogConfig = new MatDialogConfig();
 
-        dialogConfig.height = '60vh';
+        dialogConfig.height = '70vh';
         dialogConfig.width = '90vw';
 
         const dialogRef = this.matDialog.open(StopwatchDialogComponent, dialogConfig);

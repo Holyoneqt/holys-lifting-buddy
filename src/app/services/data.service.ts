@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AppData, initialAppData } from '../models/data.model';
+import { Progress } from '../models/progress.model';
 import { Template } from '../models/template.model';
 import { TrainingWeek } from '../models/week.model';
 
@@ -42,6 +43,16 @@ export class DataService {
         this.data = JSON.parse(localStorage.getItem(this.dataKey));
     }
 
+    public addProgress(progress: Progress): void {
+        const alreadyExistingProgressIndex = this.data.progress.findIndex(p => p.weekStart === progress.weekStart);
+        if (alreadyExistingProgressIndex === -1) {
+            this.data.progress.push(progress);
+        } else {
+            this.data.progress.splice(alreadyExistingProgressIndex, 1, progress);
+        }
+        this.writeData();
+    }
+
     public addWeek(week: TrainingWeek): void {
         this.data.weeks = [
             week,
@@ -53,6 +64,10 @@ export class DataService {
     public deleteWeek(week: TrainingWeek): void {
         const index = this.data.weeks.findIndex(w => w.id === week.id);
         this.data.weeks.splice(index, 1);
+
+        const progressIndex = this.data.progress.findIndex(p => p.weekStart === week.weekStart);
+        this.data.progress.splice(progressIndex, 1);
+
         this.writeData();
     }
 
