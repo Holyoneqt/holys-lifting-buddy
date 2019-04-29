@@ -54,25 +54,38 @@ export class HomeOverviewComponent implements OnInit {
             }),
         };
         
-        console.log('max', maxLiftsForThisWeek);
         const prettyTemplate: Template = {
             inUse: true,
             name: currentTemplate.name,
             days: currentTemplate.days.filter(day => day.blocks.length > 0),
         };
 
-        const nextWeekDate = new Date(new Date().setDate(new Date().getDate() + 7));
+        const thisWeeksStart = this.getStartOfWeek(new Date()).getTime();
+        const currentWeek = this.data.getData().weeks.find(w => {
+            const week = new Date(w.weekStart), thisWeek = new Date(thisWeeksStart);
+            return `${week.getDate()}.${week.getMonth()}.${week.getFullYear()}` === `${thisWeek.getDate()}.${thisWeek.getMonth()}.${thisWeek.getFullYear()}`;
+        });
+        let weekStart, weekEnd;
+        if (currentWeek) {
+            const nextWeekDate = new Date(new Date().setDate(new Date().getDate() + 7));
+            weekStart = this.getStartOfWeek(nextWeekDate).getTime();
+            weekEnd = this.getEndOfWeek(nextWeekDate).getTime();
+        } else {
+            weekStart = this.getStartOfWeek(new Date()).getTime();
+            weekEnd = this.getEndOfWeek(new Date()).getTime();
+        }
+
         this.data.addWeek({
             id: uuid(),
-            weekStart: this.getStartOfWeek(nextWeekDate).getTime(),
-            weekEnd: this.getEndOfWeek(nextWeekDate).getTime(),
+            weekStart: weekStart,
+            weekEnd: weekEnd,
             template: prettyTemplate,
         });
         this.weeks = this.data.getData().weeks;
 
         
         this.data.addProgress({
-            weekStart: this.getStartOfWeek(nextWeekDate).getTime(),
+            weekStart: weekStart,
             lifts: maxLiftsForThisWeek
         });
     }
