@@ -22,6 +22,8 @@ export class WeekComponent implements OnInit {
     public readonly EXERCISE_GROUPS = EXERCISE_GROUPS;
     public readonly DAY_NAMES = DAYS;
 
+    public selectedTab: number;
+
     public week: TrainingWeek;
 
     constructor(private data: DataService, private router: Router, private matDialog: MatDialog, private stopwatch: StopwatchService,
@@ -34,6 +36,8 @@ export class WeekComponent implements OnInit {
         } else {
             this.week = paramterWeek;
         }
+
+        this.selectedTab = new Date().getDay() - 1;
     }
 
     public isDone(dayIndex: number, blockIndex: number, setIndex: number): boolean {

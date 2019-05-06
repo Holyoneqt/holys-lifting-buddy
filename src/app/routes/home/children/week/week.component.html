@@ -15,7 +15,7 @@
     </mat-grid-tile>
 </mat-grid-list>
 
-<mat-tab-group>
+<mat-tab-group [selectedIndex]="selectedTab">
     <mat-tab *ngFor="let day of week.template.days; let i = index;" [label]="">
         <ng-template mat-tab-label>
             <mat-icon *ngIf="dayCompletedIcon(day)" color="primary" style="margin-right: 8px;">
