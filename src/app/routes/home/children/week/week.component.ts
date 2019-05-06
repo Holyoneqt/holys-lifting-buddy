@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 import { AmrapRepsDialogComponent } from 'src/app/global/components/amrap-reps-dialog/amrap-reps-dialog.component';
 import { DAYS } from 'src/app/global/static/constants';
-import { TrainingDay } from 'src/app/models/template.model';
+import { TrainingDay, TrainingDayBlock } from 'src/app/models/template.model';
 import { TrainingWeek } from 'src/app/models/week.model';
 import { StopwatchService } from 'src/app/services/stopwatch.service';
 
@@ -40,10 +40,14 @@ export class WeekComponent implements OnInit {
         return this.week.template.days[dayIndex].blocks[blockIndex].sets[setIndex].done;
     }
 
+    public isFailed(dayIndex: number, blockIndex: number, setIndex: number): boolean {
+        return this.week.template.days[dayIndex].blocks[blockIndex].sets[setIndex].failed;
+    }
+
     public setDone(dayIndex: number, blockIndex: number, setIndex: number): void {
         const set = this.week.template.days[dayIndex].blocks[blockIndex].sets[setIndex];
 
-        if (!set.done) {
+        if (!set.done || set.failed) {
             if (set.amrap) {
                 const ref = this.openAmrapSetsDialog();
                 ref.afterClosed().subscribe(value => {
@@ -53,8 +57,10 @@ export class WeekComponent implements OnInit {
                     this.toggleSetDone(dayIndex, blockIndex, setIndex);
                 });
             } else {
-                this.stopwatch.startStopwatch();
-                this.openStopwatchDialog();
+                if (!set.failed) {
+                    this.stopwatch.startStopwatch();
+                    this.openStopwatchDialog();
+                }
                 this.toggleSetDone(dayIndex, blockIndex, setIndex);
             }
         } else {
@@ -65,7 +71,20 @@ export class WeekComponent implements OnInit {
 
     private toggleSetDone(dayIndex: number, blockIndex: number, setIndex: number): void {
         const set = this.week.template.days[dayIndex].blocks[blockIndex].sets[setIndex];
-        set.done = !set.done;
+        if (set.failed) {
+            set.failed = false;
+        } else {
+            set.done = !set.done;
+        }
+        this.week.template.days[dayIndex].blocks[blockIndex].sets[setIndex] = set;
+        this.data.updateWeek(this.week);
+
+        this.changeDetector.detectChanges();
+    }
+
+    private toggleSetFailed(dayIndex: number, blockIndex: number, setIndex: number): void {
+        const set = this.week.template.days[dayIndex].blocks[blockIndex].sets[setIndex];
+        set.failed = !set.failed;
         this.week.template.days[dayIndex].blocks[blockIndex].sets[setIndex] = set;
         this.data.updateWeek(this.week);
 
@@ -76,21 +95,58 @@ export class WeekComponent implements OnInit {
         return Math.round((((set.weightPercentage * exercise.weekMax) / 100) / 2.5)) * 2.5;
     }
 
-    public dayIsComplete(day: TrainingDay): boolean {
-        let complete = true;
+    public dayCompletedIcon(day: TrainingDay): string {
+        let icon = 'done';
         day.blocks.forEach(block => {
             block.sets.forEach(set => {
-                if (!set.done) {
-                    complete = false;
+                if (set.failed) {
+                    icon = 'remove';
+                } else if (!set.done) {
+                    icon = undefined;
                 }
             });
         });
-        return complete;
+        return icon;
+    }
+
+    public blockCompleteIcon(block: TrainingDayBlock): string {
+        let icon = 'done';
+        block.sets.forEach(set => {
+            if (set.failed) {
+                icon = 'remove';
+            } else if (!set.done) {
+                icon = undefined;
+            }
+        });
+        return icon;
     }
 
     public deleteWeek(): void {
         this.data.deleteWeek(this.week);
         this.router.navigate(['home']);
+    }
+
+    public onSwipeLeft(dayIndex: number, blockIndex: number, setIndex: number) {
+        const set = this.week.template.days[dayIndex].blocks[blockIndex].sets[setIndex];
+
+        if (!set.failed) {
+            if (set.amrap) {
+                const ref = this.openAmrapSetsDialog();
+                ref.afterClosed().subscribe(value => {
+                    set.amrapReps = value;
+                    this.stopwatch.startStopwatch();
+                    this.openStopwatchDialog();
+                    this.toggleSetFailed(dayIndex, blockIndex, setIndex);
+                });
+            } else {
+                this.stopwatch.startStopwatch();
+                this.openStopwatchDialog();
+                this.toggleSetFailed(dayIndex, blockIndex, setIndex);
+            }
+        } else {
+            set.amrapReps = undefined;
+            this.toggleSetFailed(dayIndex, blockIndex, setIndex);
+        }
     }
 
     public openStopwatchDialog(): void {

@@ -14,4 +14,5 @@ export interface Set {
     amrapReps?: string;
     progression?: boolean;
     done?: boolean;
+    failed?: boolean;
 }

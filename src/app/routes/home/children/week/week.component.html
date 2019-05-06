@@ -18,13 +18,18 @@
 <mat-tab-group>
     <mat-tab *ngFor="let day of week.template.days; let i = index;" [label]="">
         <ng-template mat-tab-label>
-            <mat-icon *ngIf="dayIsComplete(day)" color="primary" style="margin-right: 8px;">done</mat-icon>
+            <mat-icon *ngIf="dayCompletedIcon(day)" color="primary" style="margin-right: 8px;">
+                {{ dayCompletedIcon(day) }}
+            </mat-icon>
             {{ DAY_NAMES[day.index] }}
         </ng-template>
         <mat-accordion>
             <mat-expansion-panel *ngFor="let block of day.blocks; let blockIndex = index;">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
+                        <mat-icon *ngIf="blockCompleteIcon(block)" class="small-icon margin-right">
+                                {{ blockCompleteIcon(block) }}
+                        </mat-icon>
                         {{ block.exercise.name | exercise }}
                     </mat-panel-title>
                     <mat-panel-description>
@@ -34,7 +39,8 @@
 
                 <mat-list #sets>
                     <mat-list-item *ngFor="let set of block.sets let setIndex = index;"
-                        (click)="setDone(i, blockIndex, setIndex)" style="height: 45px;">
+                        (click)="setDone(i, blockIndex, setIndex)" (swipe)="onSwipeLeft(i, blockIndex, setIndex)"
+                        style="height: 45px;">
                         <p style="min-width: 50px;">
                             {{ set.reps }}{{ set.amrap ? '+' : 'x' }}
                         </p>
@@ -47,6 +53,9 @@
                         </p>
                         <mat-icon style="margin-left: 40%" *ngIf="isDone(i, blockIndex, setIndex)">
                             done
+                        </mat-icon>
+                        <mat-icon color="warn" style="margin-left: 40%" *ngIf="isFailed(i, blockIndex, setIndex)">
+                            clear
                         </mat-icon>
                         <mat-divider></mat-divider>
                     </mat-list-item>
