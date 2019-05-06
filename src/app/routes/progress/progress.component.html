@@ -1,11 +1,17 @@
+<div style="width: 100%;">
+    <canvas id="big-three-chart">
+    </canvas>
+</div>
+<mat-divider style="margin: 30px 0;"></mat-divider>
 <mat-form-field class="full-width">
-    <mat-label>Filter</mat-label>
+    <mat-label>Select Exercise</mat-label>
     <mat-select [value]="selectValue" (valueChange)="onSelectValueChange($event)" multiple>
-        <mat-option *ngFor="let exercise of exercisesInTemplate" value="{{exercise.name}}">{{ exercise.name | exercise }}</mat-option>
+        <mat-option *ngFor="let exercise of exercisesInTemplate" value="{{exercise.name}}">
+            {{ exercise.name | exercise }}</mat-option>
     </mat-select>
 </mat-form-field>
 
-<div style="width: 100%; height: 40%;">
-    <canvas id="chart">
+<div style="width: 100%;">
+    <canvas id="chart" [style.visibility]="selectValue.length > 0 ? 'visible' : 'hidden'">
     </canvas>
 </div>

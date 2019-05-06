@@ -15,7 +15,7 @@ export class ProgressComponent implements OnInit {
 
     private readonly colors = ['#f44336', '#3f51b5', '#4caf50', '#e91e63', '#2196f3', '#ff9800', '#ff5722', '#8bc34a', '#00bcd4', '#cddc39', '#f0e68c', '#673ab7'];
 
-    public selectValue: string[];
+    public selectValue: string[] = [];
 
     public exercisesInTemplate: Exercise[];
     public progress: Progress[];
@@ -23,11 +23,15 @@ export class ProgressComponent implements OnInit {
     public chart: Chart;
     private chartContext: CanvasRenderingContext2D;
 
+    public bigThreeChart: Chart;
+    private bigThreeContext: CanvasRenderingContext2D;
+
     constructor(private data: DataService) { }
 
     public ngOnInit(): void {
         this.progress = this.data.getData().progress;
-        this.exercisesInTemplate = Global.Util.getExercisesUsedInTemplate(Global.Util.getTemplateInUse(this.data.getData()));
+        // get lifts used in template but filter out the big 3
+        this.exercisesInTemplate = Global.Util.getExercisesUsedInTemplate(Global.Util.getTemplateInUse(this.data.getData())).filter(e => ['1', '2', '3'].indexOf(e.name) === -1);
 
         this.chartContext = (<HTMLCanvasElement>document.getElementById('chart')).getContext('2d');
         this.chart = new Chart(this.chartContext, {
@@ -47,7 +51,23 @@ export class ProgressComponent implements OnInit {
             }
         });
 
-        this.onSelectValueChange([this.exercisesInTemplate[0].name || '1']);
+        this.bigThreeContext = (<HTMLCanvasElement>document.getElementById('big-three-chart')).getContext('2d');
+        this.bigThreeChart = new Chart(this.bigThreeContext, {
+            type: 'line',
+            data: this.getChartData('1', '2', '3'),
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                stepSize: 2.5,
+                                maxTicksLimit: 8,
+                            }
+                        }
+                    ]
+                }
+            }
+        });
     }
 
     public onSelectValueChange(selectedExercises: string[]): void {
