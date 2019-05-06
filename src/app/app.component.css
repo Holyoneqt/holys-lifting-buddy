@@ -21,3 +21,7 @@ mat-sidenav {
 mat-sidenav-content {
     margin: 2%;
 }
+
+.router-link-icon {
+    margin-right: 5px;
+}

@@ -17,6 +17,7 @@ import { WeekComponent } from './routes/home/children/week/week.component';
 import { HomeComponent } from './routes/home/home.component';
 import { LiftsComponent } from './routes/lifts/lifts.component';
 import { LoginComponent } from './routes/login/login.component';
+import { ProgressComponent } from './routes/progress/progress.component';
 import { EditTemplateComponent } from './routes/template/children/edit/edit-template.component';
 import { TemplateOverviewComponent } from './routes/template/children/overview/template-overview.component';
 import { SetsDialogComponent } from './routes/template/components/sets-dialog/sets-dialog.component';
@@ -36,6 +37,8 @@ import { StopwatchService } from './services/stopwatch.service';
         HomeOverviewComponent,
         WeekComponent,
         AmrapRepsDialogComponent,
+
+        ProgressComponent,
 
         TemplateComponent,
         TemplateOverviewComponent,

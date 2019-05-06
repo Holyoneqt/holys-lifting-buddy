@@ -26,7 +26,7 @@ export class HomeOverviewComponent implements OnInit {
     }
 
     public newTrainingsWeek(): void {
-        const template = this.data.getData().templates.find(tmp => tmp.inUse === true);
+        const template = Global.Util.getTemplateInUse(this.data.getData());
         this.increaseMaxes(this.data.getData().weeks[0]);
         const maxLiftsForThisWeek = {};
         const currentTemplate: Template = { 
